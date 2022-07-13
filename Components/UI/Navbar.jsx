@@ -174,7 +174,10 @@ const MyNavbar = () => {
                     href="https://onedrive.live.com/download?cid=4CA8BFEFFFE61AB8&resid=4CA8BFEFFFE61AB8%21397104&authkey=AA1uxVivZIR3duU&em=2"
                     download=""
                   >
-                    <button class="cta" style={{ color: "white", padding: 0 }}>
+                    <button
+                      className="cta"
+                      style={{ color: "white", padding: 0 }}
+                    >
                       Pdf Resume
                     </button>
                   </a>
@@ -187,7 +190,10 @@ const MyNavbar = () => {
                     href="https://onedrive.live.com/download?cid=4CA8BFEFFFE61AB8&resid=4CA8BFEFFFE61AB8%21397100&authkey=ABpz3ESHdwNSzEQ&em=2"
                     download=""
                   >
-                    <button class="cta" style={{ color: "white", padding: 0 }}>
+                    <button
+                      className="cta"
+                      style={{ color: "white", padding: 0 }}
+                    >
                       Doc Resume
                     </button>
                   </a>

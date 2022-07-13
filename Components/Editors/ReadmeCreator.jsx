@@ -87,8 +87,8 @@ const OtherProjects = () => {
       <Card className={`${classes.input} ${classes.topchartdetail}`}>
         <div className={classes.infodisplay}>
           <h1 className={tablestyle.title}>Readme Table Creator</h1>
-          <main class="generator">
-            <section class="controls">
+          <main className="generator">
+            <section className="controls">
               <label>
                 Rows :
                 <input

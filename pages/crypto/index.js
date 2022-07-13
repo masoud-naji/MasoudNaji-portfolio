@@ -12,10 +12,11 @@ export const getStaticProps = async () => {
     props: {
       coins: featuredCoins,
     },
+    revalidate: 10,
   };
 };
 
 const GetCoins = ({ coins }) => {
-  return <Coins coins={coins.data} style={{ background: "red" }} />;
+  return <Coins coins={coins.data}/>;
 };
 export default GetCoins;

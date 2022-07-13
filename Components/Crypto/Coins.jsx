@@ -6,9 +6,10 @@ import Pagination from "../UI/pagination";
 import Paginate from "../../lib/paginate";
 import Select from "react-select";
 import customDropDownStyles from "../../lib/DropDownStyle";
+import { useRouter } from "next/router";
 
 function Coins({ coins }) {
-  
+  const router = useRouter();
   const coinCTX = coins;
   const [foundCoins, setFoundCoins] = useState(coinCTX);
   const [order, setOrder] = useState("ASC");
@@ -35,7 +36,7 @@ function Coins({ coins }) {
     const keyword = event.target.value;
 
     if (keyword !== "") {
-      const results = coinCTX.coins
+      const results = coinCTX
         .filter((coin) => coin !== null)
         .filter((coin) => {
           return (
@@ -46,7 +47,7 @@ function Coins({ coins }) {
       setFoundCoins(results);
       setCurrentPage(1);
     } else {
-      setFoundCoins(coinCTX.coins);
+      setFoundCoins(coinCTX);
       // If the text field is empty, show all users
     }
     setName(keyword);
@@ -89,8 +90,7 @@ function Coins({ coins }) {
   };
 
   const onRowClick = (coinname) => {
-    coinCTX.setSelectedCoin(coinname);
-    Link("/Details");
+    router.push(`/crypto/${coinname}`);
   };
 
   // ///////////////////////////////Tops gainer and loser Finder////////////////
@@ -120,9 +120,8 @@ function Coins({ coins }) {
       )
     : 0;
   const TopLoserID = coinCTX
-    ? coinCTX.filter(
-        (coin) => coin.price_change_percentage_24h === TopLoser
-      )[0].id
+    ? coinCTX.filter((coin) => coin.price_change_percentage_24h === TopLoser)[0]
+        .id
     : "No loser";
   // ///////////////////////////////Favorite////////////////
   const addFavoritehandler = (coin) => {
@@ -159,64 +158,15 @@ function Coins({ coins }) {
   const FavCoinsList = () => {
     if (favShow) {
       const favelistcoin =
-        coinCTX.coins &&
-        coinCTX.coins.length > 0 &&
-        coinCTX.coins.filter((coin) => coinCTX.FavoritesCoin.includes(coin.id));
+        coinCTX &&
+        coinCTX.length > 0 &&
+        coinCTX.filter((coin) => coinCTX.FavoritesCoin.includes(coin.id));
       setFoundCoins(favelistcoin);
     } else {
-      setFoundCoins(coinCTX.coins);
+      setFoundCoins(coinCTX);
     }
     setFavShow((prev) => !prev);
   };
-
-  ////////////////////////////////////////////////////////////////
-  // const customStyles = {
-  //   control: (base, state) => ({
-  //     ...base,
-  //     color: "white",
-  //     height: "38px",
-  //     background: "transparent",
-  //     // match with the menu
-  //     borderRadius: "0.5rem",
-  //     // Overwrittes the different states of border
-  //     border: state.isFocused ? "2px double #ccc" : "2px dotted #ccc",
-  //     // Removes weird border around container
-  //     boxShadow: state.isFocused ? null : null,
-  //     "&:hover": {
-  //       // Overwrittes the different states of border
-  //       // borderColor: state.isFocused ? "red" : "blue",
-  //       // border: "1px solid #ff8b67",
-  //       // boxShadow: "0px 0px 6px #ff8b67"
-  //     },
-  //   }),
-  //   menu: (base) => ({
-  //     ...base,
-  //     // override border radius to match the box
-  //     borderRadius: 10,
-  //     // kill the gap
-  //     marginTop: 0,
-  //   }),
-  //   menuList: (base) => ({
-  //     ...base,
-  //     // kill the white space on first and last option
-  //     padding: 0,
-  //     background: "transparent",
-  //   }),
-  //   singleValue: (base) => ({
-  //     ...base,
-  //     height: "100%",
-  //     color: "#white",
-  //     paddingTop: "3px",
-  //     borderRadius: 10,
-  //   }),
-  //   option: (styles) => {
-  //     return {
-  //       ...styles,
-  //       // backgroundColor: "transparent",
-  //       borderRadius: 10,
-  //     };
-  //   },
-  // };
 
   if (isItLoading) {
     return (
@@ -235,9 +185,9 @@ function Coins({ coins }) {
   } else {
     return (
       <Card
-        // sx={{
-        //   maxWidth: 256,
-        // }}
+      // sx={{
+      //   maxWidth: 256,
+      // }}
       >
         <div className={style.tableContainer}>
           {/* ///////////////Search///////////////// */}
@@ -250,7 +200,7 @@ function Coins({ coins }) {
               onChange={filter}
               onDoubleClick={() => setShowDetails(!showDetails)}
               placeholder="Search for coin names.."
-              list={showDetails && "suggestions"}
+              list={showDetails ? "suggestions" : undefined}
             />
 
             <Select
