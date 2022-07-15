@@ -1,28 +1,29 @@
-import React, { useEffect, useState, useContext, Fragment } from "react";
-import style from "../Styles/UsersList.module.css";
-import classes from "../Styles/Card.module.css";
-import cardStyle from "../Styles/infoCard.module.css";
-import Card from "../UI/Card";
-import "../Styles/progressbar.css";
-import axios from "axios";
-import CoinContext from "../../contexts/coinContext";
-// import _uniqueId from "lodash/uniqueId";
-import infostyle from "../Styles/about.module.css";
-import Chart from "../Chart/News";
-import parse from "html-react-parser";
-import stock from "../../Images/stock.png";
-import stock2 from "../../Images/stock2.png";
-import stock3 from "../../Images/stock3.png";
-import stock4 from "../../Images/stock4.png";
+/** @jsxImportSource theme-ui */
+import React, { useEffect, useState, Fragment } from "react";
+import style from "../../Components/Crypto/UsersList.module.css";
 import { split } from "lodash";
-import versus from "../../Images/pngaaa.com-719740.png";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
+import Chart from "../../Components/Chart/News";
+import axios from "axios";
+import { Card } from "theme-ui";
+import useCoins, { searchForPrices } from "../../lib/useCoins";
+import stock from "../../public/Images/stock.png";
+import stock2 from "../../public/Images/stock2.png";
+import stock3 from "../../public/Images/stock3.png";
+import stock4 from "../../public/Images/stock4.png";
+import versus from "../../public/Images/pngaaa.com-719740.png";
+import Image from "next/image";
+// import classes from "../Styles/Card.module.css";
+// import cardStyle from "../Styles/infoCard.module.css";
+// import Card from "../../Components/UI/Card";
+// import "../Styles/progressbar.css";
+// import infostyle from "../Styles/about.module.css";
+// import parse from "html-react-parser";
+
 
 function Compare() {
-  const coinCTX = useContext(CoinContext);
-  const [foundCoins, setFoundCoins] = useState(coinCTX.selectedCoin);
-  const [foundCoins2, setFoundCoins2] = useState(coinCTX.selectedCoin);
+  // const coinCTX = useContext(CoinContext);
+  const [foundCoins, setFoundCoins] = useState([]);
+  const [foundCoins2, setFoundCoins2] = useState([]);
   const [name, setName] = useState("cardano");
   const [name2, setName2] = useState("solana");
   const [error, setError] = useState();
@@ -31,6 +32,23 @@ function Compare() {
   const [coinAllInfo, setCoinAllInfo] = useState([]);
   const [coinAllInfo2, setCoinAllInfo2] = useState([]);
   const [timeLabale, settimeLabale] = useState("");
+
+  ////////////////////////////////////////////////Coin List/////////////////////////////////////////
+  const [coinsList, setCoinsList] = useState([]);
+  useEffect(() => {
+    const GetCoinsList = async () => {
+      const featuredCoins = await useCoins();
+      setCoinsList(featuredCoins.data);
+    };
+    GetCoinsList();
+  }, []);
+  
+  
+  
+  
+  
+  
+  
   ////////////////////////////////////////////////duration Cotrol maker/////////////////////////////////////////
   const [startTime, setStartTime] = useState(
     (new Date(Date.now()).getTime() / 1000 - 86400).toFixed(0)
@@ -112,7 +130,7 @@ function Compare() {
           // console.log(res.status);
           setIsItLoading(false);
           setFoundCoins(res.data.prices);
-          coinCTX.setChartData(res.data.prices);
+          // coinCTX.setChartData(res.data.prices);
         })
         .catch((error) => {
           setError(error);
@@ -187,7 +205,7 @@ function Compare() {
           // console.log(res.status);
           setIsItLoading(false);
           setFoundCoins2(res.data.prices);
-          coinCTX.setChartData2(res.data.prices);
+          // coinCTX.setChartData2(res.data.prices);
         })
         .catch((error) => {
           setError(error);
@@ -279,8 +297,14 @@ function Compare() {
 
   if (isItLoading) {
     return (
-      <Card className={classes.card}>
-        <div className={`${style.tableContainer} ${classes.App}`}>
+      <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
+        <div>
           Loading ...
           <br />
           <progress />
@@ -289,8 +313,14 @@ function Compare() {
     );
   } else if (isItLoadingCoinDetail) {
     return (
-      <Card className={classes.card}>
-        <div className={`${style.tableContainer} ${classes.App}`}>
+      <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
+        <div>
           Loading ...
           <br />
           <progress />
@@ -305,49 +335,48 @@ function Compare() {
     Object.keys(coinAllInfo2).length > 0
   ) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 2 }}
-      >
-         <Helmet>
-        <title>Compare Crypto Currencies</title>
-        <meta
-          name="description"
-          content="Compare Crypto Currencies"
-        />
-      </Helmet>
-
-        <Card className={classes.card}>
+        <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
           <div className={style.tableContainer}>
             {/* /////////////////////////////////////////////////////Chart////////////////////////////////////////////////////// */}
 
-            <Card className={`${classes.input} ${classes.topchartdetail}`}>
+            <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
               {foundCoins && foundCoins.length > 0 ? (
-                <div className={classes.HeroPlace}>
-                  <div className={classes.chartdisplay}>
+                <div>
+                  <div>
                     <Chart data={foundCoins} data2={foundCoins2} />
                     {/* <Chart data={foundCoins} /> */}
                   </div>
-                  <div className={classes.infodisplay}>
+                  <div >
                     <div
                       style={{ background: "rgb(37, 54, 106)" }}
-                      className={classes.insidetitle}
+                      
                     ></div>
 
                     {/* /////////////////////////////////////////Fear Greed ////////////////////////////////////////// */}
                     <div className={style.toptablestatus}>
-                      <img
+                      <Image
                         src="https://alternative.me/crypto/fear-and-greed-index.png"
                         alt="Latest Crypto Fear & Greed Index"
                         style={{
                           width: "65%",
-
                           borderRadius: ".6rem",
                           filter: "hue-rotate(180deg)",
                           border: "4px rgb(252, 125, 22) solid",
-                        }}
+                      }}
+                      height="300"
+                      width="300"
                       />
                     </div>
                   </div>
@@ -360,9 +389,15 @@ function Compare() {
             <hr />
 
             {/* ///////////////////////////////////////table/////////////////////////////// */}
-            <Card className={`${classes.input} ${classes.topchartdetail}`}>
+            <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
               {/* ///////////////////////////////////////////////// coin select DropDown//////////////////////////////// */}
-              <div className={classes.flextbtn}>
+              <div >
                 <div>
                   <select
                     className={style.dropdownsmall}
@@ -371,8 +406,8 @@ function Compare() {
                     value={name}
                     // options={coinNameList}
                   >
-                    {typeof coinCTX.coins !== "undefined" ? (
-                      coinCTX.coins.map((coin) => (
+                    {typeof coinsList !== "undefined" ? (
+                      coinsList.map((coin) => (
                         <option key={coin.id} value={coin.id}>
                           {coin.symbol}
                         </option>
@@ -390,8 +425,8 @@ function Compare() {
                     value={name2}
                     // options={coinNameList}
                   >
-                    {typeof coinCTX.coins !== "undefined" ? (
-                      coinCTX.coins.map((coin) => (
+                    {typeof coinsList !== "undefined" ? (
+                      coinsList.map((coin) => (
                         <option key={coin.id} value={coin.id}>
                           {coin.symbol}
                         </option>
@@ -438,7 +473,7 @@ function Compare() {
 
               {/* //////////////////////////////////////////////BTNS//////////////////////////////////////////////// */}
               <hr />
-              <div className={cardStyle.infotext}>
+              <div >
                 <span title="Click to open Google Trend">
                   <a
                     href={`https://trends.google.com/trends/explore?q=${coinAllInfo.id}&geo=US`}
@@ -475,19 +510,16 @@ function Compare() {
 
                 <hr />
                 {/* ////////////////////////////marketCAp//////////////////////////////// */}
-                <div className={cardStyle.tableContainer}>
-                  <Card className={cardStyle.mycard}>
+                <div >
+                  <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
                     <section className="infoandpichrt">
-                      <motion.div
-                        className="emptybigcontainer"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          delay: 1,
-                          duration: 1,
-                        }}
-                      >
+                    
                         <img src={stock3} />
                         <Firstcoinimage />
                         Market Cap : $&nbsp;
@@ -503,17 +535,7 @@ function Compare() {
                               "en-US"
                             )
                           : ""}
-                      </motion.div>
-                      <motion.div
-                        className="emptybigcontainer"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          delay: 3,
-                          duration: 1,
-                        }}
-                      >
+                    
                         <Secondcoinimage />
                         Market Cap : $&nbsp;
                         {coinAllInfo2.market_data.market_cap.usd
@@ -528,18 +550,7 @@ function Compare() {
                               "en-US"
                             )
                           : ""}
-                      </motion.div>
-                      <motion.div
-                        className="emptybigcontainer"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          delay: 5,
-                          duration: 1,
-                        }}
-                        style={{ paddingLeft: "10%" }}
-                      >
+                 
                         - Market Cap of the {coinAllInfo2.id} is &nbsp;
                         {coinAllInfo.market_data.market_cap.usd
                           ? (
@@ -572,7 +583,7 @@ function Compare() {
                             ).toLocaleString("en-US")
                           : ""}{" "}
                         💵
-                      </motion.div>
+           
 
                       {/* ///////////////////////////////////////////////////////////////////////////////////////// */}
                       {/* <motion.div
@@ -655,10 +666,16 @@ function Compare() {
                 {/* //////////////////////////////////////////////////////////// */}
                 <hr />
                 {/* ////////////////////////////////////////first line of detail///////////////////////////////////////// */}
-                <div className={cardStyle.container}>
+                <div >
                   {/* //////////////////////////////////////////////////////////// */}
-                  <div className={cardStyle.tableContainer}>
-                    <Card className={cardStyle.mycard}>
+                  <div >
+                    <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
                       <img src={stock} alt="stock" />
                       community score
                       <Progress
@@ -718,8 +735,14 @@ function Compare() {
                   {/* //////////////////////////////////////////////////////////// */}
 
                   {/* //////////////////////////////////////////////////////////// */}
-                  <div className={cardStyle.tableContainer}>
-                    <Card className={cardStyle.mycard}>
+                  <div >
+                    <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
                       <img src={stock4} alt="stock" />
                       public interest stats
                       <div
@@ -811,22 +834,22 @@ function Compare() {
             </Card>
           </div>
         </Card>
-      </motion.div>
+   
     );
   } else {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 2 }}
-      >
-        <Card className={classes.card}>
-          <div className={`${style.tableContainer} ${classes.App}`}>
+         <Card  sx={{
+        color: "primary",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+        variant: "layout.root",
+      }}>
+          <div className={`${style.tableContainer}`}>
             Not Loading
           </div>
         </Card>
-      </motion.div>
+     
     );
   }
 }

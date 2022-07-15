@@ -16,24 +16,7 @@ import linkedin from "../../public/Images/linkedin.png";
 import Github from "../../public/Images/Github.png";
 import sandbox from "../../public/Images/sandbox.png";
 import Emails from "../../public/Images/Emails.png";
-const DataLink = [
-  {
-    name: "Home",
-    Link: "/",
-  },
-  {
-    name: "Projects",
-    Link: "../Components/Editors/CompareText",
-  },
-  {
-    name: "About",
-    Link: "/about",
-  },
-  {
-    name: "About",
-    Link: "/About",
-  },
-];
+
 
 const Header = () => {
   const [colorMode, setColorMode] = useColorMode();
@@ -54,10 +37,10 @@ const Header = () => {
               <Link href="/crypto/bitcoin" passHref>
                 <NavDropdown.Item>- Details Coin</NavDropdown.Item>
               </Link>
-              <Link href="/Compare" passHref>
+              <Link href="/crypto/Compare" passHref>
                 <NavDropdown.Item>- Compare Coins</NavDropdown.Item>
               </Link>
-              <Link href="/Crypto_fun_facts" passHref>
+              <Link href="/crypto/CryptoFacts" passHref>
                 <NavDropdown.Item>- Crypto Fun Facts</NavDropdown.Item>
               </Link>
               <NavDropdown.Item className="dropdown-divider">

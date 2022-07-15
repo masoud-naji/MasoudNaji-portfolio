@@ -7,6 +7,8 @@ import Paginate from "../../lib/paginate";
 import Select from "react-select";
 import customDropDownStyles from "../../lib/DropDownStyle";
 import { useRouter } from "next/router";
+import Head from "next/head";
+import Image from "next/image";
 
 function Coins({ coins }) {
   const router = useRouter();
@@ -168,6 +170,17 @@ function Coins({ coins }) {
     setFavShow((prev) => !prev);
   };
 
+  const PageHeader = (
+    <Head>
+      <title>Crypto Currency</title>
+      <link rel="icon" href="/favicon.ico" />
+      <meta
+        name="description"
+        content={`Every Thing About The Crypto Currency , and more`}
+      />
+    </Head>
+  );
+
   if (isItLoading) {
     return (
       <Card
@@ -175,6 +188,7 @@ function Coins({ coins }) {
           maxWidth: 256,
         }}
       >
+        {PageHeader}
         <div className={`${style.tableContainer}`}>
           Loading ...
           <br />
@@ -189,6 +203,7 @@ function Coins({ coins }) {
           color: "primary",
         }}
       >
+        {PageHeader}
         <div className={style.tableContainer}>
           {/* ///////////////Search///////////////// */}
           <div className={style.toptable_child}>
@@ -292,11 +307,18 @@ function Coins({ coins }) {
                                 onRowClick({ symbol: coin.symbol, id: coin.id })
                               }
                             >
-                              <img
+                              {/* <img
                                 src={coin.image}
                                 height="50rem"
                                 alt={coin.image}
-                              ></img>
+                              ></img> */}
+                              <Image
+                                src={coin.image}
+                                height="50"
+                                width="50"
+                                alt={coin.image}
+                              ></Image>
+
                             </td>
                             <td>
                               <button

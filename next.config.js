@@ -12,6 +12,6 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ['assets.coingecko.com'],
+    domains: ['assets.coingecko.com','alternative.me'],
   },
 };

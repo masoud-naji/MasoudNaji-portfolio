@@ -6,8 +6,9 @@ import style from "./UsersList.module.css";
 import useCoins, { searchForPrices } from "../../lib/useCoins";
 import { useRouter } from "next/router";
 import { split } from "lodash";
-import Chart from "./Chart/News";
+import Chart from "../Chart/News";
 import { Card } from "theme-ui";
+import Head from "next/head";
 
 const Details = ({ coin }) => {
   console.log(coin);
@@ -84,6 +85,16 @@ const Details = ({ coin }) => {
         variant: "layout.root",
       }}
     >
+      <Head>
+        <title>About The {coin.id}</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="description"
+          content={`Every Thing About The ${coin.id} , and more`}
+        />
+      </Head>
+
+
       <div className={style.tableContainer}>
         <div className={style.toptable_child}>
           <select
@@ -121,7 +132,7 @@ const Details = ({ coin }) => {
           </select>
         </div>
         <div className={style.toptable_child}>
-          {chartData && <Chart data={chartData} data2={"USD Coin"} />}
+          {chartData && <Chart data={chartData} data2={[]} />}
           <ul>
             {HttpGetter(coin.links).map((item) => {
               return <li key={item}>{item}</li>;

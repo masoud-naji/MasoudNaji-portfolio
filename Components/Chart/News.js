@@ -23,10 +23,11 @@ function Chart(props) {
   // ];
 
   const mydata = props.data;
-  const mydata2 = props.data;
+  const mydata2 = props.data2
 
 
-  // console.log(mydata);
+  console.log({mydata});
+  console.log({mydata2});
 
   const newD =mydata &&  mydata.map((mdata) => ({
     date: new Date(mdata[0]).toLocaleDateString("en-US"),

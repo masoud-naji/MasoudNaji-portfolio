@@ -1,28 +1,24 @@
 import React, { useEffect, useState, useContext } from "react";
-import style from "../Styles/UsersList.module.css";
-import classes from "../Styles/Card.module.css";
-import cardStyle from "../Styles/infoCard.module.css";
-import tablestyle from "../Styles/UsersList.module.css";
-import "../Styles/progressbar.css";
-// import "react-datepicker/dist/react-datepicker.css";
-import Card from "../UI/Card";
+import style from "./UsersList.module.css";
+import { Card } from "theme-ui";
 import axios from "axios";
-import CoinContext from "../../contexts/coinContext";
-import stock from "../../Images/stock.png";
-// import DatePicker from "react-datepicker";
+import stock from "../../public/Images/stock.png";
 import Pagination from "../UI/pagination";
-import Paginate from "../CustomHooks/Paginate";
+import Paginate from "../../lib/paginate";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Helmet } from "react-helmet";
-import DatePicker from "react-date-picker";
-
+import DatePicker from "react-date-picker/dist/entry.nostyle";
+import Image from "next/image";
+// import classes from "../Styles/Card.module.css";
+// import cardStyle from "../Styles/infoCard.module.css";
+// import tablestyle from "../Styles/UsersList.module.css";
+// import "../Styles/progressbar.css";
+// import "react-datepicker/dist/react-datepicker.css";
 // require("dotenv").config();
 // require('dotenv').config({ path: require('find-config')('.env') })
 
-function Crypto_fun_facts() {
-  const coinCTX = useContext(CoinContext);
+function Crypto_fun_facts({ coins }) {
+  const coinCTX = coins;
+  console.log(coinCTX);
   const [foundCoins, setFoundCoins] = useState();
   const [order, setOrder] = useState("ASC");
   const [name, setName] = useState("BTC");
@@ -37,7 +33,7 @@ function Crypto_fun_facts() {
   yesterday.setDate(yesterday.getDate() - 1);
 
   /////////////////page and pagination system
-  const navigate = useNavigate();
+
   const [pageSize, setPageSize] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const paginatedFilteredCoins = Paginate(
@@ -189,12 +185,6 @@ function Crypto_fun_facts() {
     setCurrentPage(1);
   };
 
-  const onRowClick = (coinname) => {
-    coinCTX.setSelectedCoin(coinname);
-    navigate("/Details");
-    // console.log(coinCTX.selectedCoin);
-  };
-
   const sorting = (col) => {
     if (order === "ASC") {
       const sorted = [...foundCoins].sort((a, b) => (a[col] > b[col] ? 1 : -1));
@@ -242,7 +232,7 @@ function Crypto_fun_facts() {
           // console.log(res.data);
           setIsItLoading(false);
           setFoundCoins(res.data.Data.Data);
-          coinCTX.setChartData(res.data.prices);
+          // coinCTX.setChartData(res.data.prices);
           // console.log(res.data.Data.Data)
         })
         .catch((error) => {
@@ -276,8 +266,16 @@ function Crypto_fun_facts() {
 
   if (isItLoading) {
     return (
-      <Card className={classes.card}>
-        <div className={`${style.tableContainer} ${classes.App}`}>
+      <Card
+        sx={{
+          color: "primary",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          variant: "layout.root",
+        }}
+      >
+        <div className={`${style.tableContainer}`}>
           Loading ...
           <br />
           <progress />
@@ -286,29 +284,32 @@ function Crypto_fun_facts() {
     );
   } else if (foundCoins && !isItLoading) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 2 }}
-      >
-        <Helmet>
-          <title>Crypto Fun Facts</title>
-          <meta name="description" content="Crypto Fun Facts" />
-          <meta name="description" content="Crypto opportunity you lost already" />
-        </Helmet>
-        <Card className={classes.card}>
+   
+        <Card
+          sx={{
+            color: "primary",
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+            variant: "layout.root",
+          }}
+        >
           <div className={style.tableContainer}>
             {/* /////////////////////////////////////////////////////Chart////////////////////////////////////////////////////// */}
 
-            <Card className={`${classes.input} ${classes.topchartdetail}`}>
+            <Card
+              sx={{
+                color: "primary",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+                variant: "layout.root",
+              }}
+            >
               {foundCoins ? (
-                <div className={classes.HeroPlaceWif}>
-                  <div className={classes.infodisplay}>
-                    <div
-                      style={{ background: "rgb(37, 54, 106)" }}
-                      className={classes.insidetitle}
-                    >
+                <div >
+                  <div >
+                    <div style={{ background: "rgb(37, 54, 106)" }}>
                       <div className="infoWhatif">
                         {/* ///////////////////////////////////////////////// coinselect DropDown//////////////////////////////// */}
                         <h3 className={style.tableTitle}>
@@ -322,8 +323,8 @@ function Crypto_fun_facts() {
                             value={name}
                             // options={coinNameList}
                           >
-                            {typeof coinCTX.coins !== "undefined" ? (
-                              coinCTX.coins.map((coin) => (
+                            {typeof coinCTX !== "undefined" ? (
+                              coinCTX.data.map((coin) => (
                                 <option key={coin.id} value={coin.symbol}>
                                   {coin.symbol}
                                 </option>
@@ -404,7 +405,7 @@ function Crypto_fun_facts() {
                         {/* ///////////////////////////////////////// ////////////////////////////////////////// */}
                       </div>
                     </div>
-                    <div className={classes.insidecontent}>
+                    <div>
                       {foundCoins && (
                         <div>
                           {/* <h3 className={style.tableTitle}>
@@ -417,7 +418,7 @@ function Crypto_fun_facts() {
                       <div className={style.toptablestatus}></div>
                     </div>
                   </div>
-                  <div className={classes.chartdisplayWif}>
+                  <div>
                     It does not necessarily mean that high prices always come
                     after low prices but Imagine if you could and just for fun ,
                     check if you invest $&nbsp;
@@ -502,24 +503,28 @@ function Crypto_fun_facts() {
 
             {/* ///////////////////////////////////////table/////////////////////////////// */}
             <Card
-              className={`${classes.input} ${classes.topchartdetail}`}
-              style={{ minHeight: "22rem" }}
+              sx={{
+                color: "primary",
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+                variant: "layout.root",
+              }}
             >
               <hr />
-              <div className={cardStyle.infotext}>
-                <div className={cardStyle.tableContainer}>
+              <div>
+                <div>
                   <Card
-                    className={cardStyle.mycard}
                     style={{
                       maxWidth: "100%!important",
                       alignContent: "center",
                     }}
                   >
-                    <img src={stock} alt="stock" />
+                    <Image src={stock} alt="stock"  width="50" height="50"/>
 
                     {/* /////////////DropDown/////////////////// */}
 
-                    <div className={tablestyle.toptable_child}>
+                    <div >
                       <input
                         type="text"
                         className={style.dropdown}
@@ -561,7 +566,7 @@ function Crypto_fun_facts() {
                       />
                     </div>
 
-                    <table className={` ${tablestyle.userTable}`}>
+                    <table className={style.userTable} rules="all">
                       <thead>
                         <tr>
                           <th
@@ -725,14 +730,20 @@ function Crypto_fun_facts() {
             </Card>
           </div>
         </Card>
-      </motion.div>
+   
     );
   } else {
     return (
-      <Card className={classes.card}>
-        <div className={`${style.tableContainer} ${classes.App}`}>
-          Not Loading
-        </div>
+      <Card
+        sx={{
+          color: "primary",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          variant: "layout.root",
+        }}
+      >
+        <div className={`${style.tableContainer}`}>Not Loading</div>
       </Card>
     );
   }
