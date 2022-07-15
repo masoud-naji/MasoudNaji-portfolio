@@ -7,11 +7,10 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-import CoinContext from "../../contexts/coinContext";
 
-function Chart() {
-  const coinCTX = useContext(CoinContext);
-  // console.log(coinCTX);
+function Chart(props) {
+
+  // console.log(props.data2);
   // console.log(coinCTX.Chartdata);
   // console.log(coinCTX.Chartdata2);
 
@@ -23,15 +22,18 @@ function Chart() {
   //   { name: "Page B", uv: 61999.57837579247 },
   // ];
 
-  const mydata = coinCTX.Chartdata;
-  const mydata2 = coinCTX.Chartdata2;
+  const mydata = props.data;
+  const mydata2 = props.data;
+
+
+  // console.log(mydata);
 
   const newD =mydata &&  mydata.map((mdata) => ({
     date: new Date(mdata[0]).toLocaleDateString("en-US"),
     price: mdata[1],
   }));
 
-  const newD2 = mydata2.map((mdata) => ({
+  const newD2 =mydata2 && mydata2.map((mdata) => ({
     price2: mdata[1],
   }));
 
@@ -44,7 +46,7 @@ function Chart() {
   // console.log(newD);
 
   const getInnerWidth = () => {
-    var WindowWidth = window.innerWidth;
+    var WindowWidth = 1200;
     switch (true) {
       case WindowWidth < 400:
         WindowWidth = window.innerWidth;

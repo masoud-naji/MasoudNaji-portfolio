@@ -78,7 +78,7 @@
   /* border-radius: 4px; */
   /* border-collapse: collapse; */
   height: 50px;
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
   word-wrap: break-word;
   
 }
@@ -97,7 +97,7 @@
 
 .userTable tr {
   padding: 0;
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
 }
 
 /* .userTable  tr:nth-child(even) {
@@ -109,7 +109,7 @@
 
 .userTable tr:hover {
   background-color: rgba(88, 88, 88, 0.5);
-  color: #ccc;
+  /* color: #ccc; */
   cursor: pointer;
 }
 

@@ -2,8 +2,8 @@ const theme = {
   initialColorMode: "light",
   colors: {
     text: "#111",
-    background: "red",
-    primary: "white",
+    background: "white",
+    primary: "#1a1a1a",
     secondary: "#3f3f3f",
     muted: "#e0e0e0",
     highlight: "#9f9f9f",

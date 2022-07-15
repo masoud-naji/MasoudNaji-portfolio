@@ -2,6 +2,12 @@
   --main-border:2px dotted rgb(0, 0, 0);
 }
 
+
+.center{
+  text-align:center;
+  margin: auto;
+}
+
 html,
 body {
   padding: 0;
@@ -10,6 +16,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     
 }
+
 
 .mainChildDiv {
   display: flex;
@@ -27,8 +34,10 @@ a {
 * {
   box-sizing: border-box;
   /* background-color: aqua; */
+/* color: #fff; */
 }
 
 /* ul {
   list-style-type: none;
 } */
+

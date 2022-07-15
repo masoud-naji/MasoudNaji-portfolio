@@ -89,8 +89,8 @@ function Coins({ coins }) {
     setCurrentPage(1);
   };
 
-  const onRowClick = (coinname) => {
-    router.push(`/crypto/${coinname}`);
+  const onRowClick = ({ symbol, id }) => {
+    router.push(`/crypto/${id}`);
   };
 
   // ///////////////////////////////Tops gainer and loser Finder////////////////
@@ -185,9 +185,9 @@ function Coins({ coins }) {
   } else {
     return (
       <Card
-      // sx={{
-      //   maxWidth: 256,
-      // }}
+        sx={{
+          color: "primary",
+        }}
       >
         <div className={style.tableContainer}>
           {/* ///////////////Search///////////////// */}
@@ -251,7 +251,11 @@ function Coins({ coins }) {
           <form>
             <table className={style.userTable} rules="all">
               <thead>
-                <tr>
+                <tr
+                  sx={{
+                    color: "primary",
+                  }}
+                >
                   <th>image</th>
                   <th onClick={FavCoinsList}>Fav</th>
                   <th onClick={() => sorting("market_cap_rank")}>Rank</th>
@@ -279,8 +283,15 @@ function Coins({ coins }) {
                           <tr
                             key={coin.id}
                             // onClick={(e) => onRowClick(coin.id)}
+                            sx={{
+                              color: "primary",
+                            }}
                           >
-                            <td onClick={(e) => onRowClick(coin.id)}>
+                            <td
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
+                            >
                               <img
                                 src={coin.image}
                                 height="50rem"
@@ -301,45 +312,59 @@ function Coins({ coins }) {
                             </td>
                             <td
                               data-label="market_cap_rank"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {coin.market_cap_rank}
                             </td>
                             <td
                               data-label="Name"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {" "}
                               {coin.name}
                             </td>
                             <td
                               data-label="symbol"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {" "}
                               {coin.symbol}
                             </td>
                             <td
                               data-label="current_price"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {coin.current_price}
                             </td>
                             <td
                               data-label="total_volume"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {coin.total_volume}
                             </td>
                             <td
                               data-label="low_24h"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {coin.low_24h} $
                             </td>
                             <td
                               data-label="high_24h"
-                              onClick={(e) => onRowClick(coin.id)}
+                              onClick={(e) =>
+                                onRowClick({ symbol: coin.symbol, id: coin.id })
+                              }
                             >
                               {coin.high_24h} $
                             </td>
