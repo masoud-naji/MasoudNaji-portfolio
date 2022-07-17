@@ -14,37 +14,142 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
-.mainChildDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
 a {
-  /* color: white; */
-  text-decoration: none;
+  color: white !important;
+  text-decoration: none !important;
 }
 
 * {
   box-sizing: border-box;
-  /* background-color: aqua; */
-  /* color: #fff; */
 }
 
-/* ul {
+.mainChildDiv {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem 0 0 !important;
+}
+
+#four ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between;
+  align-items: center;
   list-style-type: none;
+  text-decoration: none;
+  gap: 1rem;
+  margin: 5rem 0;
+  position: relative;
+}
+
+.testimonialContainer {
+  background-color: rgb(83, 83, 83);
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.4rem;
+  box-shadow: 0 0px 15px 0 rgba(110, 110, 110,0.6);
+}
+
+/* .testimonialContainer :first-child{
+  align-self: start;
+}
+.testimonialContainer :last-child{
+  align-self: end;
 } */
 
+.ImageContainer {
+  width: 200px;
+  height: 200px;
+  right: 0px;
+  bottom: 0px;
+}
 
 
+@media screen and (min-width: 45rem) {
+  html {
+    font-size: 1.2rem;
+  }
+  .mainChildDiv {
+    display: grid;
+    align-items: center;
+    justify-content: stretch;
+    align-items: center;
+    grid-template-areas:
+      "one ."
+      ". two"
+      "three ."
+      "four four"
+      ". five"
+      "six ."
+      "seven seven";
+  }
 
+  #one {
+    grid-area: one;
+    z-index: 2;
+  }
 
+  #two {
+    grid-area: two;
+    z-index: 2;
+  }
 
+  #three {
+    grid-area: three;
+    z-index: 2;
+  }
 
+  #four {
+    grid-area: four;
+    z-index: 2;
+  }
 
+  #four ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    text-decoration: none;
+    gap: 1rem;
+    margin: 10rem 0;
+  }
+
+  #five {
+    grid-area: five;
+    z-index: 2;
+    /* width: 70%; */
+  }
+
+  #six {
+    grid-area: six;
+    z-index: 2;
+  }
+
+  .testimonialContainer {
+    background-color: rgb(83, 83, 83);
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 1rem;
+  }
+}
+
+.SVGWrapper {
+  margin: auto;
+  position: fixed;
+  top: 3rem;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.LineSVG {
+  display: inline-block;
+  height: 100vh;
+}
 
 /* ---------------------------------------Data Picker----------------------------------------------------- */
 

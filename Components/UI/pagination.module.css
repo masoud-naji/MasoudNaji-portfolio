@@ -7,7 +7,7 @@
   height: 38px;
   width: 100%;
   align-items: center;
-  margin-top: -10px;
+  margin-bottom: 12px;
   filter: invert(100%);
   -webkit-filter: invert(100%);
 }

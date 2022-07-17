@@ -16,7 +16,7 @@ import linkedin from "../../public/Images/linkedin.png";
 import Github from "../../public/Images/Github.png";
 import sandbox from "../../public/Images/sandbox.png";
 import Emails from "../../public/Images/Emails.png";
-
+import Image from "next/image";
 
 const Header = () => {
   const [colorMode, setColorMode] = useColorMode();
@@ -24,12 +24,101 @@ const Header = () => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Brand href="/">Masoud Naji</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            {/* --------------------------------DropDown-------------------------------- */}
+            {/* <NavDropdown title="Projects" id="collasible-nav-dropdown">
+              <Link href="/crypto" passHref>
+                <NavDropdown.Item>Crypto Currency</NavDropdown.Item>
+              </Link> */}
+
+            <NavDropdown title="About" id="collasible-nav-dropdown">
+              <Link href="/About" passHref>
+                <NavDropdown.Item>About</NavDropdown.Item>
+              </Link>
+
+              <a
+                href="https://onedrive.live.com/download?cid=4CA8BFEFFFE61AB8&resid=4CA8BFEFFFE61AB8%21397104&authkey=AA1uxVivZIR3duU&em=2"
+                download=""
+              >
+                <button class="cta" style={{ color: "white", padding: 0 }}>
+                  Pdf Resume
+                </button>
+              </a>
+
+              <a
+                href="https://onedrive.live.com/download?cid=4CA8BFEFFFE61AB8&resid=4CA8BFEFFFE61AB8%21397100&authkey=ABpz3ESHdwNSzEQ&em=2"
+                download=""
+              >
+                <button class="cta" style={{ color: "white", padding: 0 }}>
+                  Doc Resume
+                </button>
+              </a>
+              <NavDropdown.Divider />
+              <NavDropdown.Item
+                as="li"
+                href="mailto:info@masoudnaji.com?subject=Mail From WebSite&body=..."
+              >
+                <section style={{display:"grid" , height:"50px" ,gridTemplateColumns:"1fr 1fr"}}>
+                <a
+                  href="mailto:info@masoudnaji.com?subject=Mail From WebSite&body=..."
+                  style={{ width: "100%", display: "block" }}
+                  >
+                  &nbsp; Email
+                </a>
+                    <section style={{height:"50px" ,width:"50px"}}>
+                      <Image src={Emails} width="100" height="100" />
+                    </section>
+                    </section>
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as="li"
+                href="https://www.linkedin.com/in/masoud-naji/"
+              >
+                <a
+                  href="https://www.linkedin.com/in/masoud-naji/"
+                  style={{ width: "100%", display: "block" }}
+                >
+                  <Image
+                    src={linkedin}
+                    width="100"
+                    height="100"
+                    alt="linkedin"
+                  />
+                  &nbsp; Linkedin
+                </a>
+              </NavDropdown.Item>
+              <NavDropdown.Item as="li" href="https://github.com/masoud-naji">
+                <a
+                  href="https://github.com/masoud-naji"
+                  style={{ width: "100%", display: "block" }}
+                >
+                  <Image src={Github} width="100" height="100" alt="Github" />
+                  &nbsp; Github
+                </a>
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                as="li"
+                href="https://codesandbox.io/u/masoud-naji"
+              >
+                <a
+                  href="https://codesandbox.io/u/masoud-naji"
+                  style={{ width: "100%", display: "block" }}
+                >
+                  <img
+                    src={sandbox}
+                    style={{ width: "2rem", height: "100%", padding: "0" }}
+                    alt="sandbox"
+                  />
+                  &nbsp; sandbox
+                </a>
+              </NavDropdown.Item>
+            </NavDropdown>
+
+            {/* --------------------------------Projects-------------------------------- */}
             <NavDropdown title="Projects" id="collasible-nav-dropdown">
               <Link href="/crypto" passHref>
                 <NavDropdown.Item>Crypto Currency</NavDropdown.Item>
@@ -43,9 +132,7 @@ const Header = () => {
               <Link href="/crypto/CryptoFacts" passHref>
                 <NavDropdown.Item>- Crypto Fun Facts</NavDropdown.Item>
               </Link>
-              <NavDropdown.Item className="dropdown-divider">
-                {" "}
-              </NavDropdown.Item>
+              <NavDropdown.Divider />
               <Link href="/Twittespl" passHref>
                 <NavDropdown.Item>Twitte Splitter</NavDropdown.Item>
               </Link>
