@@ -9,9 +9,11 @@ import cryptocurrency from "../public/Images/cryptocurrency.png";
 import ImageEdit from "../public/Images/ImageEdit.png";
 import Npm from "../public/Images/npm.png";
 
-function Home(props) {
+function Home({ StartScrollSpeed, EndScrollSpeed }) {
+  const StScrollSPD = StartScrollSpeed ? StartScrollSpeed : 1;
+  const EndScrollSPD = EndScrollSpeed ? EndScrollSpeed : 1.1;
   const { scrollYProgress } = useViewportScroll();
-  const MyPathLength = useTransform(scrollYProgress, [0, 1], [0, 1.1]);
+  const MyPathLength = useTransform(scrollYProgress, [0, StScrollSPD], [0, EndScrollSPD]);
 
   return (
     <div
@@ -162,7 +164,7 @@ function Home(props) {
                 <li>Compare</li>
                 <li>Crypto Fun Facts</li>
               </ol>
-          
+
               <div className="ImageContainer">
                 <Image src={cryptocurrency} width="200" height="200"></Image>
               </div>
@@ -305,12 +307,17 @@ function Home(props) {
 
       <div className="SVGWrapper">
         <motion.svg
-        width="616" height="1024" viewBox="0 0 616 1024" fill="none"
+          width="616"
+          height="1024"
+          viewBox="0 0 616 1024"
+          fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="LineSVG"
         >
           <motion.path
-          d="M2 2C148.667 61.1667 409.7 217.6 280.5 370C119 560.5 9 534.5 253 615.5C497 696.5 763 781 506 804C249 827 230.5 736 288 715.5C345.5 695 416 693.5 444.5 743.5C473 793.5 495 808.5 361.5 849.5C228 890.5 107 742 85.5 889C68.3 1006.6 148.333 1027.33 190.5 1023" stroke="gray" stroke-width="10"
+            d="M2 2C148.667 61.1667 409.7 217.6 280.5 370C119 560.5 9 534.5 253 615.5C497 696.5 763 781 506 804C249 827 230.5 736 288 715.5C345.5 695 416 693.5 444.5 743.5C473 793.5 495 808.5 361.5 849.5C228 890.5 107 742 85.5 889C68.3 1006.6 148.333 1027.33 190.5 1023"
+            stroke="gray"
+            stroke-width="10"
             style={{
               pathLength: MyPathLength,
             }}
@@ -323,9 +330,16 @@ function Home(props) {
 
 export default Home;
 
-
-
-
-<svg width="616" height="1024" viewBox="0 0 616 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M2 2C148.667 61.1667 409.7 217.6 280.5 370C119 560.5 9 534.5 253 615.5C497 696.5 763 781 506 804C249 827 230.5 736 288 715.5C345.5 695 416 693.5 444.5 743.5C473 793.5 495 808.5 361.5 849.5C228 890.5 107 742 85.5 889C68.3 1006.6 148.333 1027.33 190.5 1023" stroke="black" stroke-width="10"/>
-</svg>
+<svg
+  width="616"
+  height="1024"
+  viewBox="0 0 616 1024"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M2 2C148.667 61.1667 409.7 217.6 280.5 370C119 560.5 9 534.5 253 615.5C497 696.5 763 781 506 804C249 827 230.5 736 288 715.5C345.5 695 416 693.5 444.5 743.5C473 793.5 495 808.5 361.5 849.5C228 890.5 107 742 85.5 889C68.3 1006.6 148.333 1027.33 190.5 1023"
+    stroke="black"
+    stroke-width="10"
+  />
+</svg>;

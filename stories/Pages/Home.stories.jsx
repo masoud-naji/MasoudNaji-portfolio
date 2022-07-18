@@ -11,3 +11,11 @@ export default {
 const Template = (args) => <HomePage {...args} />;
 
 export const Home = Template.bind({});
+
+export const Home_With_Params = Template.bind({});
+
+
+Home_With_Params.args = {
+    StartScrollSpeed: "1",
+    EndScrollSpeed : "2",
+           }
