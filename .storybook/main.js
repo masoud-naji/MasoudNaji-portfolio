@@ -1,5 +1,6 @@
 const path = require('path')
 
+
 module.exports = {
   "stories": [
     "../stories/**/*.stories.mdx",
@@ -16,6 +17,7 @@ module.exports = {
       }
     }
   ],
+  staticDirs: ['../public','../Components'],
   "framework": "@storybook/react",
   "core": {
     "builder": "@storybook/builder-webpack5"

@@ -20,6 +20,7 @@ import Image from "next/image";
 // import parse from "html-react-parser";
 
 
+
 function Compare() {
   // const coinCTX = useContext(CoinContext);
   const [foundCoins, setFoundCoins] = useState([]);

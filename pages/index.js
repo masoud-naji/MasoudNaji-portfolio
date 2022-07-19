@@ -8,12 +8,17 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 import cryptocurrency from "../public/Images/cryptocurrency.png";
 import ImageEdit from "../public/Images/ImageEdit.png";
 import Npm from "../public/Images/npm.png";
+import Card from "../Components/UI/Card";
 
 function Home({ StartScrollSpeed, EndScrollSpeed }) {
   const StScrollSPD = StartScrollSpeed ? StartScrollSpeed : 1;
   const EndScrollSPD = EndScrollSpeed ? EndScrollSpeed : 1.1;
   const { scrollYProgress } = useViewportScroll();
-  const MyPathLength = useTransform(scrollYProgress, [0, StScrollSPD], [0, EndScrollSPD]);
+  const MyPathLength = useTransform(
+    scrollYProgress,
+    [0, StScrollSPD],
+    [0, EndScrollSPD]
+  );
 
   return (
     <div
@@ -31,6 +36,7 @@ function Home({ StartScrollSpeed, EndScrollSpeed }) {
 
       <div id="one">
         <h1>Masoud Naji</h1>
+
         <h2 style={{ fontSize: "small" }}>
           &nbsp;
           <a href="https://github.com/masoud-naji">Github</a>
